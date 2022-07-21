@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { db } from "./cfg";
+import { collection, addDoc } from "firebase/firestore";
+
+const saveDataDb = (data) => {
+  const dbRef = collection(db, "users");
+
+  addDoc(dbRef, data).then((data) => {
+    console.log("data saved");
+  });
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p
+        onClick={() => {
+          saveDataDb({
+            username: "ada",
+            password: "ada",
+          });
+        }}
+      >
+        testApp
+      </p>
     </div>
   );
 }
